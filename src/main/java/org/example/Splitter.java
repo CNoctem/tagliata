@@ -48,9 +48,11 @@ public class Splitter {
             fileSize -= read;
             assert (read == byteChunk.length);
             nChunks++;
-            newName = outDir + "/" + infileName + ".p" + padLeftZeros("" + (nChunks - 1), padSize);
+            var newFilename = infileName + ".p" + padLeftZeros("" + (nChunks - 1), padSize);
+            newName = outDir + "/" + newFilename;
             chunk = new FileOutputStream(newName);
             chunk.write(byteChunk);
+            System.out.println("Created " + newFilename);
             chunk.flush();
             chunk.close();
         }

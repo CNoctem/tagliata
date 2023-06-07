@@ -6,11 +6,11 @@ public class Tagliata {
 
     public static void main(String[] args) throws IOException {
         var aaa = new Args.ArgsBuilder()
-                .addCommand("s", "split", "Split file.")
+                .addCommand("s", "split", "Split file")
                 .addCommand("j", "join", "Joins parts")
-                .addOption("-c", "--chunk-size", "<chunk size> (default is 25M")
-                .addOption("-d", "--destination", "Destination path.")
-                .addOption("-i", "--input", "Path of dir containing files to join.")
+                .addOption("-c", "--chunk-size", "<chunk size> (default is 25M)")
+                .addOption("-d", "--destination", "Destination path")
+                .addOption("-i", "--input", "Path of dir containing files to join")
                 .build();
 
         aaa.parse(args);

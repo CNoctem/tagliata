@@ -9,6 +9,11 @@ public class Args {
             var reduced = str;//.replace("-", "");
             return reduced.equals(first) || reduced.equals(second);
         }
+
+        @Override
+        public String toString() {
+            return padRight(first + ", " + second, 20) + third;
+        }
     }
 
     public static class ArgsBuilder {
@@ -45,6 +50,7 @@ public class Args {
     }
 
     public void parse(String[] args) {
+        if (args.length == 0) printHelpAndExit();
         for (int i = 0; i < args.length; i++) {
             if (args[i].startsWith("--") || args[i].startsWith("-")) {
                 var opt = args[i];//.replace("-", "");
@@ -66,6 +72,18 @@ public class Args {
         }
     }
 
+    private void printHelpAndExit() {
+        if (commands.size() > 0) {
+            System.out.println("Commands: ");
+            commands.forEach(c -> System.out.println("\t" + c));
+        }
+        if (options.size() > 0) {
+            System.out.println("Options: ");
+            options.forEach(o -> System.out.println("\t" + o));
+        }
+        System.out.println("Goodbye.\n");
+    }
+
     public boolean isCommandPresent(String cmd) {
         return parsedCommands.contains(cmd);
     }
@@ -80,6 +98,14 @@ public class Args {
 
     public List<String> getArguments() {
         return arguments;
+    }
+
+
+    private static String padRight(String inputString, int length) {
+        if (inputString.length() >= length) return inputString;
+        StringBuilder sb = new StringBuilder().append(inputString);
+        sb.append(" ".repeat(length - inputString.length()));
+        return sb.toString();
     }
 
 }
